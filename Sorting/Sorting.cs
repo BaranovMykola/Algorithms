@@ -24,6 +24,26 @@ namespace Sorting
             }
             Console.WriteLine("{0} iterations", q);
         }
+        public static void insertionSort(int[] arr)
+        {
+            for(int i=1;i<arr.Length;++i)
+            {
+                int j = 0;
+                int elementToMove = arr[i];
+                for (;j<i;++j)
+                {
+                    if(arr[i] < arr[j])
+                    {
+                        break;
+                    }
+                }
+                for(int k = i;k>j;--k)
+                {
+                    arr[k] = arr[k - 1];
+                }
+                arr[j] = elementToMove;
+            }
+        }
         public static void swap(ref int left, ref int right)
         {
             int swapMemory = left;
@@ -45,9 +65,9 @@ namespace Sorting
     {
         static void Main(string[] args)
         {
-            int[] arr = { 8,7,6,5,4,3,2,1 };
+            int[] arr = { 4, 3, 2, 1 };
             //int[] arr = Sort.getRandomArr(1000);
-            Sort.bubleSort(arr);
+            Sort.insertionSort(arr);
             foreach (int i in arr)
             {
                 Console.Write("{0} ", i);
