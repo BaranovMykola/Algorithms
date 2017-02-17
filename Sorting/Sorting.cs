@@ -30,7 +30,6 @@ namespace Sorting
             left = right;
             right = swapMemory;
         }
-        //something
         public static int[] getRandomArr(int lenght)
         {
             int[] arr = new int[lenght];
@@ -42,7 +41,7 @@ namespace Sorting
             return arr;
         }
     }
-    class Program
+    class Programm
     {
         static void Main(string[] args)
         {
