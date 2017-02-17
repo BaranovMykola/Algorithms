@@ -9,9 +9,9 @@ namespace Sorting
     class Sort
     {
         public static void bubleSort(int[] arr)
-        {   // Cmin = n^2/2 + n + 1/2 = O(n^2) ?
+        {   // Cmin = n^2/2 + n + 1/2 = O(n^2)
             // Cmax = n^2*(3/2) + n + 3/2
-            int q = 0;
+            // C(n) = n^2 + n + 2 = O(n^2)
             for (int i = 0; i < arr.Length; ++i)
             {
                 for (int j = 1; j < arr.Length-i; ++j)
@@ -22,24 +22,26 @@ namespace Sorting
                     }
                 }
             }
-            Console.WriteLine("{0} iterations", q);
         }
         public static void insertionSort(int[] arr)
-        {
+        {   // Cmin(n) = n^/2 + n + 1/2 = O(n^2)
+            // Cmax(n) = n^2 + n/2 + 1/2 = O(n^2)
+            // C(n) = (3/4)n^2 + (3/4)n + 1/2 = O(n^2)
             for(int i=1;i<arr.Length;++i)
             {
                 int j = 0;
                 int elementToMove = arr[i];
                 for (;j<i;++j)
                 {
+                    ++q;
                     if(arr[i] < arr[j])
                     {
                         break;
                     }
                 }
-                for(int k = i;k>j;--k)
+                for(;i>j;--i) // 0 or (n-1)*n/2
                 {
-                    arr[k] = arr[k - 1];
+                    arr[i] = arr[i - 1];
                 }
                 arr[j] = elementToMove;
             }
@@ -65,7 +67,7 @@ namespace Sorting
     {
         static void Main(string[] args)
         {
-            int[] arr = { 4, 3, 2, 1 };
+            int[] arr = { 1,2,3,4 };
             //int[] arr = Sort.getRandomArr(1000);
             Sort.insertionSort(arr);
             foreach (int i in arr)
