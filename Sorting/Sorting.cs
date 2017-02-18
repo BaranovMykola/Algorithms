@@ -84,7 +84,7 @@ namespace Sorting
         static void Main(string[] args)
         {
             int[] arr = { 1, 4, 3, 2 };
-            int[] arr = Sort.getRandomArr(1000);
+            //int[] arr = Sort.getRandomArr(1000);
             Sort.selectionSort(arr);
             foreach (int i in arr)
             {
