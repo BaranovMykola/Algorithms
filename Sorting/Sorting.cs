@@ -33,7 +33,6 @@ namespace Sorting
                 int elementToMove = arr[i];
                 for (;j<i;++j)
                 {
-                    ++q;
                     if(arr[i] < arr[j])
                     {
                         break;
@@ -44,6 +43,23 @@ namespace Sorting
                     arr[i] = arr[i - 1];
                 }
                 arr[j] = elementToMove;
+            }
+        }
+        public static void selectionSort(int[] arr)
+        {   //Cmin(n) = n^2/2 + n = O(n^2)
+            //Cmax(n) = (3/2)n^2 + n = O(n^2)
+            //C(n) = 2n^2 + n
+            for(int i=0;i<arr.Length;++i)
+            {   // n
+                int minElementIndex = i;
+                for(int j = i;j<arr.Length;++j)
+                {   // n^2/2
+                    if(arr[j] < arr[minElementIndex])
+                    {
+                        minElementIndex = j; //n
+                    }
+                }
+                Sort.swap(ref arr[i], ref arr[minElementIndex]);
             }
         }
         public static void swap(ref int left, ref int right)
@@ -67,9 +83,9 @@ namespace Sorting
     {
         static void Main(string[] args)
         {
-            int[] arr = { 1,2,3,4 };
-            //int[] arr = Sort.getRandomArr(1000);
-            Sort.insertionSort(arr);
+            int[] arr = { 1, 4, 3, 2 };
+            int[] arr = Sort.getRandomArr(1000);
+            Sort.selectionSort(arr);
             foreach (int i in arr)
             {
                 Console.Write("{0} ", i);
