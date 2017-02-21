@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 
 namespace Sorting
 {
@@ -145,15 +146,15 @@ namespace Sorting
         {
             int left = from;
             int right = to-1;
-            int indexPivot = from / 2 + to / 2;
+            int indexPivot = (from + to) / 2;
             int pivot = arr[indexPivot];
             while(left < right)
             {
-                while(arr[left] < pivot && left <= indexPivot)
+                while(arr[left] <= pivot && left < indexPivot)
                 {
                     ++left;
                 }
-                while (pivot < arr[right] && indexPivot <= right)
+                while (pivot <= arr[right] && indexPivot < right)
                 {
                     --right;
                 }
@@ -164,23 +165,24 @@ namespace Sorting
                         swap(ref arr[indexPivot], ref arr[indexPivot + 1]);
                         ++indexPivot;
                     }
-                    if (right == indexPivot)
+                    else if (right == indexPivot)
                     {
                         swap(ref arr[indexPivot], ref arr[indexPivot - 1]);
                         --indexPivot;
                     }
-                    swap(ref arr[left], ref arr[right]);
-                    ++left;
-                    --right;
+                    if (left != indexPivot && right != indexPivot)
+                    {
+                        swap(ref arr[left], ref arr[right]);
+                    }
                 }
             }
-            if (to / 2 - from > 1)
+            if (indexPivot - from > 1)
             {
-                quickSort(ref arr, from, to / 2);
+                quickSort(ref arr, from, indexPivot);
             }
-            if (to - to / 2 > 1)
+            if (to - indexPivot > 1)
             {
-                quickSort(ref arr, to / 2, to);
+                quickSort(ref arr, indexPivot, to);
             }
         }
     }
@@ -188,8 +190,8 @@ namespace Sorting
     {
         static void Main(string[] args)
         {
-            int[] arr = { 1,2,5,4,3};
-            //int[] arr = Sort.getRandomArr(20);
+            //int[] arr = { 5, 6, 3, 11, 7, 17, 3, 5, 16, 19 };
+            int[] arr = Sort.getRandomArr(9000000);
             Sort.quickSort(ref arr, 0, arr.Length);
             foreach (int i in arr)
             {
