@@ -141,14 +141,56 @@ namespace Sorting
             }
             return mergeArray(f, s);
         }
+        public static void quickSort(ref int[] arr, int from , int to)
+        {
+            int left = from;
+            int right = to-1;
+            int indexPivot = from / 2 + to / 2;
+            int pivot = arr[indexPivot];
+            while(left < right)
+            {
+                while(arr[left] < pivot && left <= indexPivot)
+                {
+                    ++left;
+                }
+                while (pivot < arr[right] && indexPivot <= right)
+                {
+                    --right;
+                }
+                if(left < right)
+                {
+                    if(left == indexPivot)
+                    {
+                        swap(ref arr[indexPivot], ref arr[indexPivot + 1]);
+                        ++indexPivot;
+                    }
+                    if (right == indexPivot)
+                    {
+                        swap(ref arr[indexPivot], ref arr[indexPivot - 1]);
+                        --indexPivot;
+                    }
+                    swap(ref arr[left], ref arr[right]);
+                    ++left;
+                    --right;
+                }
+            }
+            if (to / 2 - from > 1)
+            {
+                quickSort(ref arr, from, to / 2);
+            }
+            if (to - to / 2 > 1)
+            {
+                quickSort(ref arr, to / 2, to);
+            }
+        }
     }
     class Programm
     {
         static void Main(string[] args)
         {
-            int[] arr = { 4, 3, 2, 1 };
-            //int[] arr = Sort.getRandomArr(1000);
-            Sort.mergeSort(ref arr);
+            int[] arr = { 1,2,5,4,3};
+            //int[] arr = Sort.getRandomArr(20);
+            Sort.quickSort(ref arr, 0, arr.Length);
             foreach (int i in arr)
             {
                 Console.Write("{0} ", i);
