@@ -62,6 +62,12 @@ namespace Sorting
                 Sort.swap(ref arr[i], ref arr[minElementIndex]);
             }
         }
+        public static void mergeSort(int[] arr)
+        {
+            int[] f;
+            int[] s;
+            splitArray(arr, out f, out s);
+        }
         public static void swap(ref int left, ref int right)
         {
             int swapMemory = left;
@@ -78,6 +84,28 @@ namespace Sorting
             }
             return arr;
         }
+        private static void splitArray(int[] arr, out int[] first, out int[] second)
+        {
+            int fSize = arr.Length / 2;
+            int sSize = arr.Length - (arr.Length / 2);
+            first = new int[fSize];
+            second = new int[sSize];
+            for(int i=0;i<fSize;++i)
+            {
+                first[i] = arr[i];
+            }
+            for (int i = 0; i < sSize; ++i)
+            {
+                second[i] = arr[i+fSize];
+            }
+        }
+        private static void mergeArray(int[] first, int[] second, out int[] result)
+        {
+            result = new int[first.Length + second.Length];
+            int fIndex = 0;
+            int sIndex = 0;
+
+        }
     }
     class Programm
     {
@@ -85,7 +113,7 @@ namespace Sorting
         {
             int[] arr = { 1, 4, 3, 2 };
             //int[] arr = Sort.getRandomArr(1000);
-            Sort.selectionSort(arr);
+            Sort.mergeSort(arr);
             foreach (int i in arr)
             {
                 Console.Write("{0} ", i);
