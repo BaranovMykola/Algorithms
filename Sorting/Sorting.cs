@@ -67,6 +67,8 @@ namespace Sorting
             int[] f;
             int[] s;
             splitArray(arr, out f, out s);
+            int[] result;
+            mergeArray(f, s, out result);
         }
         public static void swap(ref int left, ref int right)
         {
@@ -104,14 +106,35 @@ namespace Sorting
             result = new int[first.Length + second.Length];
             int fIndex = 0;
             int sIndex = 0;
-
+            for(int i=0;i<result.Length;++i)
+            {
+                if(fIndex >= first.Length)
+                {
+                    result[i] = second[sIndex++];
+                }
+                else if (sIndex >= second.Length)
+                {
+                    result[i] = first[fIndex++];
+                }
+                else
+                {
+                    if(first[fIndex] < second[sIndex])
+                    {
+                        result[i] = first[fIndex++];
+                    }
+                    else
+                    {
+                        result[i] = second[sIndex++];
+                    }
+                }
+            }
         }
     }
     class Programm
     {
         static void Main(string[] args)
         {
-            int[] arr = { 1, 4, 3, 2 };
+            int[] arr = { 1, 3, 2, 4 };
             //int[] arr = Sort.getRandomArr(1000);
             Sort.mergeSort(arr);
             foreach (int i in arr)
