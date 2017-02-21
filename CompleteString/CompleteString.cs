@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CompleteString
 {
-    class Program
+    class CompleteString
     {
         public static bool isCompletable(string A, string B)
         {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DivideToAllDigits
 {
-    class Program
+    class DivideToAllDigits
     {
         static void Main(string[] args)
         {
