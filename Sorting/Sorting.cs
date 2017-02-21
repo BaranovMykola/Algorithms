@@ -64,8 +64,6 @@ namespace Sorting
         }
         public static void mergeSort(ref int[] arr)
         {
-            int[] f;
-            int[] s;
             arr = splitAndMerge(arr);
         }
         public static void swap(ref int left, ref int right)
@@ -148,7 +146,7 @@ namespace Sorting
     {
         static void Main(string[] args)
         {
-            int[] arr = { 4,3,2,1 };
+            int[] arr = { 4, 3, 2, 1 };
             //int[] arr = Sort.getRandomArr(1000);
             Sort.mergeSort(ref arr);
             foreach (int i in arr)
