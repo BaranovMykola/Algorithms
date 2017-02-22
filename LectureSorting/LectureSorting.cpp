@@ -53,12 +53,53 @@ void inserton_sort(int* arr, int size)
 	}
 }
 
+void merge(int* arr, int from, int middle, int to)
+{
+	int i = from;
+	int j = middle + 1;
+	int currentSize = to - from + 1;
+	int* temp = new int[currentSize];
+	for (int k = 0;k < currentSize;++k)
+	{
+		if (j > to || arr[j] > arr[i] && i <= middle)
+		{
+			temp[k] = arr[i];
+			++i;
+		}
+		else
+		{
+			temp[k] = arr[j];
+			++j;
+		}
+	}
+	for (int k = 0;k < currentSize;++k)
+	{
+		arr[from] = temp[k];
+		++from;
+	}
+}
+void split(int* arr, int from, int to)
+{
+	if (to - from < 1)
+	{
+		return;
+	}
+	int middle = (from + to) / 2;
+	if (to - from >= 1)
+	{
+		split(arr, from, middle);
+		split(arr, middle+1, to);
+		merge(arr, from, middle, to);
+	}
+}
+
+
 int main()
 {
 	const int size = 4;
 	int arr[4] = { 4,3,2,1 };
 	printArr(arr, size);
-	inserton_sort(arr, size);
+	split(arr, 0, size);
 	printArr(arr, size);
 	getchar();
 	return 0;
