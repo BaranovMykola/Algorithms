@@ -10,16 +10,19 @@ namespace Sorting
     class Sort
     {
         public static void bubleSort(int[] arr)
-        {   // Cmin = n^2/2 + n + 1/2 = O(n^2)
-            // Cmax = n^2*(3/2) + n + 3/2
-            // C(n) = n^2 + n + 2 = O(n^2)
-            for (int i = 0; i < arr.Length; ++i)
+        {   // Cmin = n^2/2 + n + 1/2 = O(n^2)      =>      Tmin(n) = n+1
+            // Cmax = n^2*(3/2) + n + 3/2       =>      Tmax(n) = n^2/2+ n/2 + 1/2
+            // C(n) = n^2 + n + 2 = O(n^2)      =>      ...
+            bool wasSwapped = true;
+            for (int i = 1; i < arr.Length && wasSwapped; ++i)
             {
-                for (int j = 1; j < arr.Length-i; ++j)
+                wasSwapped = false;
+                for (int j = 0; j < arr.Length-i; ++j)
                 {
-                    if (arr[j] < arr[j - 1])
+                    if (arr[j] > arr[j + 1])
                     {
-                        Sort.swap(ref arr[j], ref arr[j-1]);
+                        Sort.swap(ref arr[j], ref arr[j+1]);
+                        wasSwapped = true;
                     }
                 }
             }
@@ -191,8 +194,8 @@ namespace Sorting
         static void Main(string[] args)
         {
             //int[] arr = { 5, 6, 3, 11, 7, 17, 3, 5, 16, 19 };
-            int[] arr = Sort.getRandomArr(9000000);
-            Sort.quickSort(ref arr, 0, arr.Length);
+            int[] arr = Sort.getRandomArr(1000);
+            Sort.bubleSort(arr);
             foreach (int i in arr)
             {
                 Console.Write("{0} ", i);
