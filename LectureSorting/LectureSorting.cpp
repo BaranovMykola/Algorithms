@@ -55,13 +55,14 @@ void inserton_sort(int* arr, int size)
 
 void merge(int* arr, int from, int middle, int to)
 {
+	int counter = from;
 	int i = from;
 	int j = middle + 1;
-	int currentSize = to - from + 1;
-	int* temp = new int[currentSize];
-	for (int k = 0;k < currentSize;++k)
+	int newSize = to - from + 1;
+	int* temp = new int[newSize];
+	for (int k = 0;k < newSize;++k)
 	{
-		if (j > to || arr[j] > arr[i] && i <= middle)
+		if (j > to || arr[i] < arr[j] && i <= middle)
 		{
 			temp[k] = arr[i];
 			++i;
@@ -72,11 +73,12 @@ void merge(int* arr, int from, int middle, int to)
 			++j;
 		}
 	}
-	for (int k = 0;k < currentSize;++k)
+	for (int k = 0;k < newSize;++k)
 	{
-		arr[from] = temp[k];
-		++from;
+		arr[counter] = temp[k];
+		++counter;
 	}
+	delete temp;
 }
 void split(int* arr, int from, int to)
 {
@@ -96,10 +98,10 @@ void split(int* arr, int from, int to)
 
 int main()
 {
-	const int size = 4;
-	int arr[4] = { 4,3,2,1 };
+	int size = 4;
+	int arr[] = { 4,3,2,1 };
 	printArr(arr, size);
-	split(arr, 0, size);
+	split(arr, 0, size-1);
 	printArr(arr, size);
 	getchar();
 	return 0;
