@@ -39,12 +39,26 @@ void printArr(int* arr, int size)
 	cout << endl;
 }
 
+void inserton_sort(int* arr, int size)
+{
+	for (int i = 0;i < size;++i)
+	{
+		int value = arr[i];
+		int j = i - 1;
+		for (;j >= 0 && arr[j] > value;--j)
+		{
+			arr[j + 1] = arr[j];
+		}
+		arr[j + 1] = value;
+	}
+}
+
 int main()
 {
 	const int size = 4;
 	int arr[4] = { 4,3,2,1 };
 	printArr(arr, size);
-	bare_selection_sort(arr, size);
+	inserton_sort(arr, size);
 	printArr(arr, size);
 	getchar();
 	return 0;
