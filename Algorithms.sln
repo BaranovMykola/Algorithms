@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CompleteString", "CompleteS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DivideToAllDigits", "DivideToAllDigits\DivideToAllDigits.csproj", "{60490641-2606-4095-8D53-A16408A46B13}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LectureSorting", "LectureSorting\LectureSorting.vcxproj", "{F8A5AB8A-2041-4E85-8DD6-EA781AE19A1D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -91,6 +93,16 @@ Global
 		{60490641-2606-4095-8D53-A16408A46B13}.Release|x64.Build.0 = Release|Any CPU
 		{60490641-2606-4095-8D53-A16408A46B13}.Release|x86.ActiveCfg = Release|Any CPU
 		{60490641-2606-4095-8D53-A16408A46B13}.Release|x86.Build.0 = Release|Any CPU
+		{F8A5AB8A-2041-4E85-8DD6-EA781AE19A1D}.Debug|Any CPU.ActiveCfg = Debug|Win32
+		{F8A5AB8A-2041-4E85-8DD6-EA781AE19A1D}.Debug|x64.ActiveCfg = Debug|x64
+		{F8A5AB8A-2041-4E85-8DD6-EA781AE19A1D}.Debug|x64.Build.0 = Debug|x64
+		{F8A5AB8A-2041-4E85-8DD6-EA781AE19A1D}.Debug|x86.ActiveCfg = Debug|Win32
+		{F8A5AB8A-2041-4E85-8DD6-EA781AE19A1D}.Debug|x86.Build.0 = Debug|Win32
+		{F8A5AB8A-2041-4E85-8DD6-EA781AE19A1D}.Release|Any CPU.ActiveCfg = Release|Win32
+		{F8A5AB8A-2041-4E85-8DD6-EA781AE19A1D}.Release|x64.ActiveCfg = Release|x64
+		{F8A5AB8A-2041-4E85-8DD6-EA781AE19A1D}.Release|x64.Build.0 = Release|x64
+		{F8A5AB8A-2041-4E85-8DD6-EA781AE19A1D}.Release|x86.ActiveCfg = Release|Win32
+		{F8A5AB8A-2041-4E85-8DD6-EA781AE19A1D}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
