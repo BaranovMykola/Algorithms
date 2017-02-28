@@ -343,10 +343,10 @@ namespace Sorting
         {
             if (digit <= maxDigitsCount)
             {
-                int[] radixCounting = new int[10]; //for each digit
+                int[] radixCounting = new int[20]; //for each digit
                 foreach (var i in arr)
                 {
-                    ++radixCounting[discharge(i, digit)];
+                    ++radixCounting[discharge(i, digit)+9];
                 }
                 for (int i = 0; i < radixCounting.Length - 1; ++i)
                 {
@@ -355,7 +355,7 @@ namespace Sorting
                 int[] tempArr = new int[arr.Length];
                 for (int i = arr.Length - 1; i >= 0; --i)
                 {
-                    tempArr[--radixCounting[Sort.discharge(arr[i], digit)]] = arr[i];
+                    tempArr[--radixCounting[Sort.discharge(arr[i], digit)+9]] = arr[i];
                 }
                 arr = tempArr;
                 _radixSort(ref arr, maxDigitsCount, digit + 1);
@@ -394,7 +394,7 @@ namespace Sorting
     {
         static void Main(string[] args)
         {
-            int[] arr = { 100, 234, 453, -9000 };
+            int[] arr = { 100, 234, 453, -9000, -54, 45, 674, -22134 };
             //int[] arr = Sort.getRandomArr(1000);
             Sort.radixSort(ref arr);
             //Sort.printArr(arr);
