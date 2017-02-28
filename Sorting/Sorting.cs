@@ -339,9 +339,9 @@ namespace Sorting
             }
             return number % 10;
         }
-        public static void radixSort(ref int[] arr, int digit = 0)
+        public static void radixSort(ref int[] arr, int maxDigitsCount, int digit = 0)
         {
-            if (digit <= 2)
+            if (digit <= maxDigitsCount)
             {
                 int[] radixCounting = new int[10]; //for each digit
                 foreach (var i in arr)
@@ -360,8 +360,36 @@ namespace Sorting
                     tempArr[--radixCounting[Sort.discharge(arr[i], digit)]] = arr[i];
                 }
                 arr = tempArr;
-                radixSort(ref arr, digit + 1);
+                radixSort(ref arr, maxDigitsCount, digit + 1);
             }
+        }
+        public static void proxyRadixSort(ref int[] arr)
+        {
+            radixSort(ref arr, Sort.getMaxDigits(arr));
+        }
+        private static int getMaxDigits(int[] arr)
+        {
+            int max = 1;
+            foreach(int i in arr)
+            {
+                int currentCount = Sort.getDigitsCount(i);
+                if(max < currentCount)
+                {
+                    max = currentCount;
+                }
+            }
+            return max;
+        }
+        private static int getDigitsCount(int element)
+        {
+            int count = 0;
+            do
+            {
+                element /= 10;
+                ++count;
+            }
+            while (element != 0);
+            return count;
         }
     }
     class Programm
@@ -370,7 +398,7 @@ namespace Sorting
         {
             //int[] arr = { 100, 234, 453 };
             int[] arr = Sort.getRandomArr(1000);
-            Sort.radixSort(ref arr);
+            Sort.proxyRadixSort(ref arr);
             //Sort.printArr(arr);
             foreach (int i in arr)
             {
