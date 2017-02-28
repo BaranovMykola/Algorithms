@@ -339,7 +339,7 @@ namespace Sorting
             }
             return number % 10;
         }
-        public static void radixSort(ref int[] arr, int maxDigitsCount, int digit = 0)
+        public static void _radixSort(ref int[] arr, int maxDigitsCount, int digit = 0)
         {
             if (digit <= maxDigitsCount)
             {
@@ -348,24 +348,22 @@ namespace Sorting
                 {
                     ++radixCounting[discharge(i, digit)];
                 }
-                printArr(radixCounting);
                 for (int i = 0; i < radixCounting.Length - 1; ++i)
                 {
                     radixCounting[i + 1] += radixCounting[i];
                 }
-                printArr(radixCounting);
                 int[] tempArr = new int[arr.Length];
                 for (int i = arr.Length - 1; i >= 0; --i)
                 {
                     tempArr[--radixCounting[Sort.discharge(arr[i], digit)]] = arr[i];
                 }
                 arr = tempArr;
-                radixSort(ref arr, maxDigitsCount, digit + 1);
+                _radixSort(ref arr, maxDigitsCount, digit + 1);
             }
         }
-        public static void proxyRadixSort(ref int[] arr)
+        public static void radixSort(ref int[] arr)
         {
-            radixSort(ref arr, Sort.getMaxDigits(arr));
+            _radixSort(ref arr, Sort.getMaxDigits(arr));
         }
         private static int getMaxDigits(int[] arr)
         {
@@ -396,9 +394,9 @@ namespace Sorting
     {
         static void Main(string[] args)
         {
-            //int[] arr = { 100, 234, 453 };
-            int[] arr = Sort.getRandomArr(1000);
-            Sort.proxyRadixSort(ref arr);
+            int[] arr = { 100, 234, 453, -9000 };
+            //int[] arr = Sort.getRandomArr(1000);
+            Sort.radixSort(ref arr);
             //Sort.printArr(arr);
             foreach (int i in arr)
             {
