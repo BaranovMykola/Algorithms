@@ -260,34 +260,35 @@ namespace Sorting
         }
         public static void countingSort(int[] arr)
         {
-            int[] counting = new int[maxElement(arr)+1];
+            int[] counting = new int[getScatter(arr)+1];
+            int offset = minElement(arr);
             foreach(var i in arr)
             {
-                ++counting[i];
+                ++counting[i-offset];
             }
-            //Sort.printArr(counting);
+            Sort.printArr(counting);
             for (int i = 0; i < counting.Length-1;++i)
             {
                 counting[i + 1] += counting[i];
             }
-            int element = 0;
+            int element = offset;
             int ind = 0;
             int quantity;
             do
             {
-                quantity = counting[element];
+                quantity = counting[element-offset];
                 int lastQuantity = 0;
-                if(element > 0)
+                if(element > offset)
                 {
-                    lastQuantity = counting[element - 1];
+                    lastQuantity = counting[element - 1 - offset];
                 }
                 for(int j=0;j<quantity-lastQuantity;++j)
                 {
-                    arr[ind++] = counting[element];
+                    arr[ind++] = element;
                 }
                 ++element;
             }
-            while (element < counting.Length);
+            while (element-offset < counting.Length);
 
             //Sort.printArr(counting);
         }
@@ -302,6 +303,22 @@ namespace Sorting
                 }
             }
             return max;
+        }
+        private static int minElement(int[] arr)
+        {
+            int min = Int32.MaxValue;
+            foreach (var i in arr)
+            {
+                if (i < min)
+                {
+                    min = i;
+                }
+            }
+            return min;
+        }
+        private static int getScatter(int[] arr)
+        {
+            return maxElement(arr) - minElement(arr);
         }
         public static bool testSortedArr(int[] arr)
         {
@@ -319,8 +336,8 @@ namespace Sorting
     {
         static void Main(string[] args)
         {
-            //int[] arr = { 4, 2, 3, 1, 9, 0, 4, 1 };
-            int[] arr = Sort.getRandomArr(1000);
+            int[] arr = { -5, 4, 0,5,7,-8,1,-2,-3,4,-6,-7,-3,-1 };
+            //int[] arr = Sort.getRandomArr(1000);
             Sort.countingSort(arr);
             //Sort.printArr(arr);
             foreach (int i in arr)
