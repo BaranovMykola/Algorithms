@@ -389,14 +389,49 @@ namespace Sorting
             while (element != 0);
             return count;
         }
+        public static void bucketSort(int[] arr)
+        {
+            int max = maxElement(arr);
+            LinkedList<int>[] buckets = new LinkedList<int>[arr.Length];
+            foreach(int i in arr)
+            {
+                int a = i * arr.Length / (max + 1);
+                if(buckets[a] == null)
+                {
+                    buckets[a] = new LinkedList<int>();
+                }
+                buckets[a].AddLast(i);
+            }
+            int indexBucket = 0;
+            int index = 0;
+            foreach(var i in buckets)
+            {
+                Console.Write("Bucket {0} \t", indexBucket++);
+                if (i != null)
+                {
+                    var lst = i.OrderBy(x => x).ToList();
+                    foreach (var j in lst)
+                    {
+                        arr[index++] = j;
+                        Console.Write("{0} ", j);
+                    }
+                }
+                else
+                {
+                    Console.Write("Empty bucket");
+                }
+                Console.WriteLine();
+            }
+
+        }
     }
     class Programm
     {
         static void Main(string[] args)
         {
-            int[] arr = { 100, 234, 453, -9000, -54, 45, 674, -22134 };
+            int[] arr = { 6,4,3,9 };
             //int[] arr = Sort.getRandomArr(1000);
-            Sort.radixSort(ref arr);
+            Sort.bucketSort(arr);
             //Sort.printArr(arr);
             foreach (int i in arr)
             {
