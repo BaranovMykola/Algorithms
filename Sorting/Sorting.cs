@@ -61,6 +61,14 @@ namespace Sorting
     }
     class Sort
     {
+        public static void printArr(int[] arr)
+        {
+            foreach(var i in arr)
+            {
+                Console.Write("{0} ", i);
+            }
+            Console.WriteLine();
+        }
         public static void bubleSort(int[] arr)
         {   // Cmin = n^2/2 + n + 1/2 = O(n^2)      =>      Tmin(n) = n+1
             // Cmax = n^2*(3/2) + n + 3/2       =>      Tmax(n) = n^2/2+ n/2 + 1/2
@@ -69,11 +77,11 @@ namespace Sorting
             for (int i = 1; i < arr.Length && wasSwapped; ++i)
             {
                 wasSwapped = false;
-                for (int j = 0; j < arr.Length-i; ++j)
+                for (int j = 0; j < arr.Length - i; ++j)
                 {
                     if (arr[j] > arr[j + 1])
                     {
-                        Sort.swap(ref arr[j], ref arr[j+1]);
+                        Sort.swap(ref arr[j], ref arr[j + 1]);
                         wasSwapped = true;
                     }
                 }
@@ -83,18 +91,18 @@ namespace Sorting
         {   // Cmin(n) = n^/2 + n + 1/2 = O(n^2)
             // Cmax(n) = n^2 + n/2 + 1/2 = O(n^2)
             // C(n) = (3/4)n^2 + (3/4)n + 1/2 = O(n^2)
-            for(int i=1;i<arr.Length;++i)
+            for (int i = 1; i < arr.Length; ++i)
             {
                 int j = 0;
                 int elementToMove = arr[i];
-                for (;j<i;++j)
+                for (; j < i; ++j)
                 {
-                    if(arr[i] < arr[j])
+                    if (arr[i] < arr[j])
                     {
                         break;
                     }
                 }
-                for(;i>j;--i) // 0 or (n-1)*n/2
+                for (; i > j; --i) // 0 or (n-1)*n/2
                 {
                     arr[i] = arr[i - 1];
                 }
@@ -105,12 +113,12 @@ namespace Sorting
         {   //Cmin(n) = n^2/2 + n = O(n^2)
             //Cmax(n) = (3/2)n^2 + n = O(n^2)
             //C(n) = 2n^2 + n
-            for(int i=0;i<arr.Length;++i)
+            for (int i = 0; i < arr.Length; ++i)
             {   // n
                 int minElementIndex = i;
-                for(int j = i;j<arr.Length;++j)
+                for (int j = i; j < arr.Length; ++j)
                 {   // n^2/2
-                    if(arr[j] < arr[minElementIndex])
+                    if (arr[j] < arr[minElementIndex])
                     {
                         minElementIndex = j; //n
                     }
@@ -132,9 +140,9 @@ namespace Sorting
         {
             int[] arr = new int[lenght];
             Random rnd = new Random();
-            for(int i =0;i<lenght;++i)
+            for (int i = 0; i < lenght; ++i)
             {
-                arr[i] = rnd.Next()%20;
+                arr[i] = rnd.Next() % 20;
             }
             return arr;
         }
@@ -144,13 +152,13 @@ namespace Sorting
             int sSize = arr.Length - (arr.Length / 2);
             first = new int[fSize];
             second = new int[sSize];
-            for(int i=0;i<fSize;++i)
+            for (int i = 0; i < fSize; ++i)
             {
                 first[i] = arr[i];
             }
             for (int i = 0; i < sSize; ++i)
             {
-                second[i] = arr[i+fSize];
+                second[i] = arr[i + fSize];
             }
         }
         private static int[] mergeArray(int[] first, int[] second)
@@ -158,9 +166,9 @@ namespace Sorting
             int[] result = new int[first.Length + second.Length];
             int fIndex = 0;
             int sIndex = 0;
-            for(int i=0;i<result.Length;++i)
+            for (int i = 0; i < result.Length; ++i)
             {
-                if(fIndex >= first.Length)
+                if (fIndex >= first.Length)
                 {
                     result[i] = second[sIndex++];
                 }
@@ -170,7 +178,7 @@ namespace Sorting
                 }
                 else
                 {
-                    if(first[fIndex] < second[sIndex])
+                    if (first[fIndex] < second[sIndex])
                     {
                         result[i] = first[fIndex++];
                     }
@@ -187,25 +195,25 @@ namespace Sorting
             int[] f;
             int[] s;
             splitArray(arr, out f, out s);
-            if(f.Length > 1)
+            if (f.Length > 1)
             {
                 f = splitAndMerge(f);
             }
             if (s.Length > 1)
-            { 
-                 s = splitAndMerge(s);
+            {
+                s = splitAndMerge(s);
             }
             return mergeArray(f, s);
         }
-        public static void quickSort(ref int[] arr, int from , int to)
+        public static void quickSort(ref int[] arr, int from, int to)
         {
             int left = from;
-            int right = to-1;
+            int right = to - 1;
             int indexPivot = (from + to) / 2;
             int pivot = arr[indexPivot];
-            while(left < right)
+            while (left < right)
             {
-                while(arr[left] <= pivot && left < indexPivot)
+                while (arr[left] <= pivot && left < indexPivot)
                 {
                     ++left;
                 }
@@ -213,9 +221,9 @@ namespace Sorting
                 {
                     --right;
                 }
-                if(left < right)
+                if (left < right)
                 {
-                    if(left == indexPivot)
+                    if (left == indexPivot)
                     {
                         swap(ref arr[indexPivot], ref arr[indexPivot + 1]);
                         ++indexPivot;
@@ -243,25 +251,83 @@ namespace Sorting
         public static void treeSort(int[] arr)
         {
             Tree sortTree = new Tree(arr[0]);
-            for(int i=1;i<arr.Length;++i)
+            for (int i = 1; i < arr.Length; ++i)
             {
                 sortTree.push(arr[i]);
             }
             int index = 0;
             sortTree.printTree(arr, ref index);
         }
+        public static void countingSort(int[] arr)
+        {
+            int[] counting = new int[maxElement(arr)+1];
+            foreach(var i in arr)
+            {
+                ++counting[i];
+            }
+            //Sort.printArr(counting);
+            for (int i = 0; i < counting.Length-1;++i)
+            {
+                counting[i + 1] += counting[i];
+            }
+            int element = 0;
+            int ind = 0;
+            int quantity;
+            do
+            {
+                quantity = counting[element];
+                int lastQuantity = 0;
+                if(element > 0)
+                {
+                    lastQuantity = counting[element - 1];
+                }
+                for(int j=0;j<quantity-lastQuantity;++j)
+                {
+                    arr[ind++] = counting[element];
+                }
+                ++element;
+            }
+            while (element < counting.Length);
+
+            //Sort.printArr(counting);
+        }
+        private static int maxElement(int[] arr)
+        {
+            int max = Int32.MinValue;
+            foreach(var i in arr)
+            {
+                if(max < i)
+                {
+                    max = i;
+                }
+            }
+            return max;
+        }
+        public static bool testSortedArr(int[] arr)
+        {
+            for(int i=0;i<arr.Length-1; ++i)
+            {
+                if(arr[i+1] < arr[i])
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
     }
     class Programm
     {
         static void Main(string[] args)
         {
-            //int[] arr = { 4, 2, 3, 1 };
+            //int[] arr = { 4, 2, 3, 1, 9, 0, 4, 1 };
             int[] arr = Sort.getRandomArr(1000);
-            Sort.treeSort(arr);
+            Sort.countingSort(arr);
+            //Sort.printArr(arr);
             foreach (int i in arr)
             {
                 Console.Write("{0} ", i);
             }
+            Console.Write("\nTest passed: {0}", Sort.testSortedArr(arr));
             Console.ReadKey();
         }
     }
