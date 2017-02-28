@@ -7,6 +7,58 @@ using System.Threading;
 
 namespace Sorting
 {
+    class Tree
+    {
+        public Tree leftChild { get; set; } = null;
+        public Tree rightChild { get; set; } = null;
+        public int data { get; set; }
+        public void push(int _data)
+        {
+            if(data <= _data)
+            {
+                if(rightChild == null)
+                {
+                    rightChild = new Tree(_data);
+                }
+                else
+                {
+                    rightChild.push(_data);
+                }
+            }
+            else
+            {
+                if (leftChild == null)
+                {
+                    leftChild = new Tree(_data);
+                }
+                else
+                {
+                    leftChild.push(_data);
+                }
+            }
+        }
+        public Tree(int _data)
+        {
+            data = _data;
+        }
+        public void printNode()
+        {
+            //Console.Write("{0} ", data);
+        }
+        public void printTree(int[] arr, ref int index)
+        {
+            if(leftChild != null)
+            {
+                leftChild.printTree(arr, ref index);
+            }
+            printNode();
+            arr[index++] = data;
+            if(rightChild != null)
+            {
+                rightChild.printTree(arr, ref index);
+            }
+        }
+    }
     class Sort
     {
         public static void bubleSort(int[] arr)
@@ -188,14 +240,24 @@ namespace Sorting
                 quickSort(ref arr, indexPivot, to);
             }
         }
+        public static void treeSort(int[] arr)
+        {
+            Tree sortTree = new Tree(arr[0]);
+            for(int i=1;i<arr.Length;++i)
+            {
+                sortTree.push(arr[i]);
+            }
+            int index = 0;
+            sortTree.printTree(arr, ref index);
+        }
     }
     class Programm
     {
         static void Main(string[] args)
         {
-            //int[] arr = { 5, 6, 3, 11, 7, 17, 3, 5, 16, 19 };
+            //int[] arr = { 4, 2, 3, 1 };
             int[] arr = Sort.getRandomArr(1000);
-            Sort.bubleSort(arr);
+            Sort.treeSort(arr);
             foreach (int i in arr)
             {
                 Console.Write("{0} ", i);

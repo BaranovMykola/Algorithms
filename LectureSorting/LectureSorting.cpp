@@ -99,7 +99,7 @@ void split(int* arr, int from, int to)
 int main()
 {
 	int size = 4;
-	int arr[] = { 4,3,2,1 };
+	int arr[] = { 4,3,2,1 };	
 	printArr(arr, size);
 	split(arr, 0, size-1);
 	printArr(arr, size);
