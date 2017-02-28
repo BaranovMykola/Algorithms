@@ -331,14 +331,46 @@ namespace Sorting
             }
             return true;
         }
+        public static int discharge(int number, int i)
+        {
+            for(int j=0;j<i;++j)
+            {
+                number /= 10;
+            }
+            return number % 10;
+        }
+        public static void radixSort(ref int[] arr, int digit = 0)
+        {
+            if (digit <= 2)
+            {
+                int[] radixCounting = new int[10]; //for each digit
+                foreach (var i in arr)
+                {
+                    ++radixCounting[discharge(i, digit)];
+                }
+                printArr(radixCounting);
+                for (int i = 0; i < radixCounting.Length - 1; ++i)
+                {
+                    radixCounting[i + 1] += radixCounting[i];
+                }
+                printArr(radixCounting);
+                int[] tempArr = new int[arr.Length];
+                for (int i = arr.Length - 1; i >= 0; --i)
+                {
+                    tempArr[--radixCounting[Sort.discharge(arr[i], digit)]] = arr[i];
+                }
+                arr = tempArr;
+                radixSort(ref arr, digit + 1);
+            }
+        }
     }
     class Programm
     {
         static void Main(string[] args)
         {
-            int[] arr = { -5, 4, 0,5,7,-8,1,-2,-3,4,-6,-7,-3,-1 };
-            //int[] arr = Sort.getRandomArr(1000);
-            Sort.countingSort(arr);
+            //int[] arr = { 100, 234, 453 };
+            int[] arr = Sort.getRandomArr(1000);
+            Sort.radixSort(ref arr);
             //Sort.printArr(arr);
             foreach (int i in arr)
             {
