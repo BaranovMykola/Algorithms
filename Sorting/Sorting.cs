@@ -392,46 +392,38 @@ namespace Sorting
         public static void bucketSort(int[] arr)
         {
             int max = maxElement(arr);
-            //LinkedList<int>[] buckets = new LinkedList<int>[arr.Length];
             int[][] buckets = new int[arr.Length][];
             int[] deepBuckets = new int[arr.Length];
             foreach(int i in arr)
             {
                 int a = i * arr.Length / (max + 1);
-                //if(buckets[a] == null)
-                //{
-                //    buckets[a] = new LinkedList<int>();
-                //}
                 if (deepBuckets[a] == 0)
                 {
                     buckets[a] = new int[arr.Length];
                 }
                 buckets[a][deepBuckets[a]++] = i;
             }
-            int indexBucket = 0;
             int index = 0;
             for(int i=0;i<arr.Length;++i)
             {
                 if (deepBuckets[i] > 1)
                 {
                     Array.Resize<int>(ref buckets[i], deepBuckets[i]);
-                    bubleSort(buckets[i]);
-                    //bucketSort(buckets[i]);
+                    radixSort(ref buckets[i]);
                 }
                 for (int j=0;j<deepBuckets[i]; ++j)
                 {
                     arr[index++] = buckets[i][j];
                 }
             }
-            Console.WriteLine();
         }
     }
     class Programm
     {
         static void Main(string[] args)
         {
-            int[] arr = { 6, 4, 3, 9 };
-            //int[] arr = Sort.getRandomArr(1000);
+            //int[] arr = { 6, 4, 3, 9 };
+            int[] arr = Sort.getRandomArr(1000);
             Sort.bucketSort(arr);
             //Sort.printArr(arr);
             foreach (int i in arr)
